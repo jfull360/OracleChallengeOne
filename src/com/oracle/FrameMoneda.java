@@ -4,8 +4,16 @@
  */
 package com.oracle;
 
+import com.google.gson.Gson;
 import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  *
@@ -20,7 +28,7 @@ public class FrameMoneda extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     private String cantidad = "";
 
     public String getCantidad() {
@@ -29,11 +37,9 @@ public class FrameMoneda extends javax.swing.JFrame {
 
     public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
-        System.out.println("Me llego la cantidad --->>> "+ this.cantidad);
-        
-    }
-    
+        System.out.println("Me llego la cantidad --->>> " + this.cantidad);
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,20 +146,48 @@ public class FrameMoneda extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         //process of convert 
-        Integer cantidad = 0;
+        //Integer cantidad = 0;
+
+        String url = "http://api.exchangeratesapi.io/v1/latest?access_key=978740c918d9d5541176e20e454ce299&symbols=USD,AUD,CAD,PLN,MXN";
+        String respuesta = "";
+        try {
+            respuesta = metodoHttpGet(url);
+            System.out.println("La respuesta es:\n" + respuesta);
+            Gson gson = new Gson();
+            //User user = gson.fromJson(respuesta, User.class);
+        } catch (Exception e) {
+            // Manejar excepción
+            e.printStackTrace();
+        }
         
         
         switch (Options.getSelectedIndex()) {
             case 0:
                 //De Pesos MXN a Dólar
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad ) * 0.059); //String.valueOf( Double.parseDouble(this.cantidad ) * 0.059);
+                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.059); //String.valueOf( Double.parseDouble(this.cantidad ) * 0.059);
                 break;
             case 1:
                 //De Pesos MXN a Euro
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad ) * 0.054);
+                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.054);
                 break;
-                
-                /*
+            case 2:
+                //De Pesos MXN a Libras
+                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.046);
+                break;
+                case 3:
+                //De Pesos MXN a Libras
+                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.059); //String.valueOf( Double.parseDouble(this.cantidad ) * 0.059);
+                break;
+            case 4:
+                //De Pesos MXN a Yen
+                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.054);
+                break;
+            case 5:
+                //De Pesos MXN a Won Coreano
+                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.046);
+                break;
+
+            /*
                 
 
 De Pesos MXN a Libras
@@ -164,13 +198,11 @@ De Euro a Pesos MXN
 De Libras a Pesos MXN
 De Yen a Pesos MXN
 De Won Coreano a Pesos MXN
-                */
-            
+             */
         }
-        
-        
-        JOptionPane.showMessageDialog(null, "Tienes "+this.cantidad+" Dolares");
-        
+
+        JOptionPane.showMessageDialog(null, "Tienes " + this.cantidad + " Dolares");
+
     }//GEN-LAST:event_jPanel2MouseClicked
 
     /**
@@ -206,6 +238,24 @@ De Won Coreano a Pesos MXN
                 new FrameMoneda().setVisible(true);
             }
         });
+    }
+
+    public static String metodoHttpGet(String urlEntrada) throws Exception {
+        StringBuilder resultado = new StringBuilder();
+        String linea;
+        // Create URL Object
+        //URL url = new URL(urlEntrada); DEPRECATED
+        URI uri = new URI(urlEntrada);
+        URL url = uri.toURL();
+
+        HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+        conexion.setRequestMethod("GET");
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
+        while ((linea = rd.readLine()) != null) {
+            resultado.append(linea);
+        }
+        rd.close();// Close BufferedReader
+        return resultado.toString();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
