@@ -16,6 +16,9 @@ public class Frame extends javax.swing.JFrame {
     public Frame() {
         initComponents();
         setLocationRelativeTo(null);
+        convertcurrencyModel convert = new convertcurrencyModel();
+        convert.SetImage(jLabel3, "src/images/creditos.png");
+        this.repaint();
     }
 
     /**
@@ -28,31 +31,28 @@ public class Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         background = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         Options = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Bienvenido");
-        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 160, 40));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        background.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 90, 100));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione una opción de conversión");
         background.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 350, 50));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/title.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        background.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 260, 70));
 
         Options.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conversor de Moneda" }));
         Options.addActionListener(new java.awt.event.ActionListener() {
@@ -92,15 +92,29 @@ public class Frame extends javax.swing.JFrame {
 
         background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 200, 30));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/title.png"))); // NOI18N
+        jLabel5.setText("jLabel3");
+        background.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 260, 70));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Bienvenido");
+        background.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 160, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Powered by");
+        background.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 160, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
         );
 
         pack();
@@ -114,7 +128,7 @@ public class Frame extends javax.swing.JFrame {
         //String options = Options.getSelectedItem().toString();       
         FrameInput frame2 = new FrameInput();//create instance od frameInput
         frame2.setVisible(true); //open frameInput
-        new Frame().setVisible(false); // close frame
+        setVisible(false); // close frame
         frame2.setIndexPass(Options.getSelectedIndex()); // pass index to frameInput using Encapsulation
     }//GEN-LAST:event_jPanel1MouseClicked
 
@@ -153,13 +167,16 @@ public class Frame extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Options;
     private javax.swing.JPanel background;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

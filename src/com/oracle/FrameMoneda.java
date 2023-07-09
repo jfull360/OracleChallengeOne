@@ -5,15 +5,12 @@
 package com.oracle;
 
 import com.google.gson.Gson;
-import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLEncoder;
 
 /**
  *
@@ -27,6 +24,9 @@ public class FrameMoneda extends javax.swing.JFrame {
     public FrameMoneda() {
         initComponents();
         setLocationRelativeTo(null);
+        convertcurrencyModel convert = new convertcurrencyModel();
+        convert.SetImage(jLabel3, "src/images/creator.jpg");
+        this.repaint();
     }
 
     private String cantidad = "";
@@ -37,8 +37,6 @@ public class FrameMoneda extends javax.swing.JFrame {
 
     public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
-        System.out.println("Me llego la cantidad --->>> " + this.cantidad);
-
     }
 
     /**
@@ -55,21 +53,28 @@ public class FrameMoneda extends javax.swing.JFrame {
         Options = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Elije la moneda a la que deseas convertir tu dinero");
+        jLabel1.setText("API Creator  API Ninjas Team");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 237, -1));
 
-        Options.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "De Pesos MXN a Dólar", "De Pesos MXN a Euro", "De Pesos MXN a Libras", "De Pesos MXN a Yen", "De Pesos MXN a Won Coreano", "De Dólar a pesos MXN", "De Euro a Pesos MXN", "De Libras a Pesos MXN", "De Yen a Pesos MXN", "De Won Coreano a Pesos MXN" }));
+        Options.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "De Pesos MXN a Dólar", "De Pesos MXN a Euro", "De Pesos MXN a Libras", "De Pesos MXN a Yen", "De Pesos MXN a Won SurCoreano", "De Dólar a pesos MXN", "De Euro a Pesos MXN", "De Libras a Pesos MXN", "De Yen a Pesos MXN", "De Won SurCoreano a Pesos MXN" }));
         Options.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OptionsActionPerformed(evt);
             }
         });
+        jPanel1.add(Options, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 101, 396, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 134, 190));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -99,38 +104,52 @@ public class FrameMoneda extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Options, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
-                .addGap(189, 189, 189))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Elije la moneda a la que deseas convertir tu dinero");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 52, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 84, 83));
+
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Regresar");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(72, 72, 72))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addComponent(Options, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap())
         );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,65 +165,93 @@ public class FrameMoneda extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         //process of convert 
-        //Integer cantidad = 0;
 
-        String url = "http://api.exchangeratesapi.io/v1/latest?access_key=978740c918d9d5541176e20e454ce299&symbols=USD,AUD,CAD,PLN,MXN";
-        String respuesta = "";
-        try {
-            respuesta = metodoHttpGet(url);
-            System.out.println("La respuesta es:\n" + respuesta);
-            Gson gson = new Gson();
-            //User user = gson.fromJson(respuesta, User.class);
-        } catch (Exception e) {
-            // Manejar excepción
-            e.printStackTrace();
-        }
-        
-        
+        String intercambio = "";
+
         switch (Options.getSelectedIndex()) {
             case 0:
                 //De Pesos MXN a Dólar
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.059); //String.valueOf( Double.parseDouble(this.cantidad ) * 0.059);
+                //this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.059); //String.valueOf( Double.parseDouble(this.cantidad ) * 0.059);
+                intercambio = "MXN&want=USD";
                 break;
             case 1:
                 //De Pesos MXN a Euro
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.054);
+                intercambio = "MXN&want=EUR";
                 break;
             case 2:
                 //De Pesos MXN a Libras
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.046);
+                intercambio = "MXN&want=GBP";
                 break;
-                case 3:
-                //De Pesos MXN a Libras
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.059); //String.valueOf( Double.parseDouble(this.cantidad ) * 0.059);
+            case 3:
+                //De Pesos MXN a Yen
+                intercambio = "MXN&want=JPY";
                 break;
             case 4:
-                //De Pesos MXN a Yen
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.054);
+                //De Pesos MXN a Won SurCoreano
+                intercambio = "MXN&want=KRW";
                 break;
             case 5:
-                //De Pesos MXN a Won Coreano
-                this.cantidad = String.format("%.3f", Double.parseDouble(this.cantidad) * 0.046);
+                // De Dólar a pesos MXN
+                intercambio = "USD&want=MXN";
                 break;
-
-            /*
-                
-
-De Pesos MXN a Libras
-De Pesos MXN a Yen
-De Pesos MXN a Won Coreano
-De Dólar a pesos MXN
-De Euro a Pesos MXN
-De Libras a Pesos MXN
-De Yen a Pesos MXN
-De Won Coreano a Pesos MXN
-             */
+            case 6:
+                //De Euro a Pesos MXN
+                intercambio = "EUR&want=MXN";
+                break;
+            case 7:
+                //De Libras a Pesos MXN
+                intercambio = "GBP&want=MXN";
+                break;
+            case 8:
+                //De Yen a Pesos MXN
+                intercambio = "JPY&want=MXN";
+                break;
+            case 9:
+                //De Won SurCoreano a Pesos MXN
+                intercambio = "KRW&want=MXN";
+                break;
         }
 
-        JOptionPane.showMessageDialog(null, "Tienes " + this.cantidad + " Dolares");
+        String url = "https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have=" + intercambio + "&amount=" + this.cantidad;
+        String respuesta = "";
+        try {
+            respuesta = metodoHttpGet(url);
+            Gson gson = new Gson();
+            convertcurrencyModel convertcurrencyModel = gson.fromJson(respuesta, convertcurrencyModel.class);
+            JOptionPane.showMessageDialog(null, convertcurrencyModel.getOld_amount() + " " + convertcurrencyModel.getOld_currency() + " es igual a "
+                    + convertcurrencyModel.getNew_amount() + " " + convertcurrencyModel.getNew_currency());
+            int seleccion = JOptionPane.showOptionDialog(
+                    null,
+                    "¿Desea continuar?",
+                    "Favor de seleccionar una opción",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"Si, deseo realizar otra conversión", "No, deseo finalizar el programa de conversión"},
+                    "Si, deseo realizar otra conversión");
+            if(seleccion == 0){
+                backAction();
+            }else{
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            // Manejar excepción
+            JOptionPane.showMessageDialog(this, "Lo sentimos, hubo un error de conexión.");
+        }
+
 
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        //boton´s code of back action
+        backAction();
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void backAction(){
+        FrameInput frame = new FrameInput();//create instance od frameInput
+        frame.setVisible(true); //open frameInput
+        setVisible(false);
+    }
     /**
      * @param args the command line arguments
      */
@@ -249,7 +296,9 @@ De Won Coreano a Pesos MXN
         URL url = uri.toURL();
 
         HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
-        conexion.setRequestMethod("GET");
+        conexion.setRequestMethod("GET"); //ADD Headers with KEY to API Request
+        conexion.setRequestProperty("X-RapidAPI-Key", "d8f7ae0d77mshc9f6fabf2a8f202p165524jsn39c459c6fb41");
+        conexion.setRequestProperty("X-RapidAPI-Host", "currency-converter-by-api-ninjas.p.rapidapi.com");
         BufferedReader rd = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
         while ((linea = rd.readLine()) != null) {
             resultado.append(linea);
@@ -261,8 +310,12 @@ De Won Coreano a Pesos MXN
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Options;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
