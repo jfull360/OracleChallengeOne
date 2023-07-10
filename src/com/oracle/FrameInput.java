@@ -181,8 +181,8 @@ public class FrameInput extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         //code of button 
-        if (jTextField1.getText().compareTo("") == 0 || !textFieldInit()) {//validation 
-            JOptionPane.showMessageDialog(this, "Favor de escribir una cantidad");
+        if (!isNumeric(jTextField1.getText())) {//validation 
+            JOptionPane.showMessageDialog(this, "Favor de escribir una cantidad valida.");
             return;
         }
         setVisible(false);
@@ -191,6 +191,17 @@ public class FrameInput extends javax.swing.JFrame {
         frameMoneda.setCantidad(String.format("%.6f",Double.parseDouble(jTextField1.getText())));//validation to just get MAX 6 decimal digits
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    public static boolean isNumeric(String cadena) {
+        boolean resultado;
+        try {
+            Double.parseDouble(cadena);
+            resultado = true;
+        } catch (Exception excepcion) {
+            resultado = false;
+        }
+        return resultado;
+    }
+    
     private void jTextField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MousePressed
         jTextField1.setForeground(Color.BLACK); 
         if (!textFieldInit()) {//remove placeHolder
